@@ -1,0 +1,38 @@
+
+.ChatMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+
+.ChatMessage.person {
+  align-self: flex-end;
+  background-color: var(--blue-primary);
+}
+.ChatMessage.person > .date,
+.ChatMessage.person > .body {
+  color: white;
+}
+
+.ChatMessage.bot {
+  align-self: flex-start;
+  background-color: var(--gray-primary);
+}
+.ChatMessage.bot > .date,
+.ChatMessage.bot > .body {
+  color: black;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: var(--gray-secondary);
+}
+
+.body {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}

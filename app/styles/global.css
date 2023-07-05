@@ -1,0 +1,25 @@
+:root {
+	--blue-primary: #127df0;
+	--blue-secondary: #6bb0fa;
+
+  --gray-primary: #f5f5f5;
+  --gray-secondary: #e0e0e0;
+}
+
+* {
+	line-height: 100%;
+	margin: 0;
+	padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+	line-height: 140%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	line-height: 160%;
+}

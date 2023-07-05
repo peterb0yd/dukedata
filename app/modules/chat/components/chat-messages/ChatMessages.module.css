@@ -1,0 +1,9 @@
+
+.ChatMessages {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
