@@ -1,6 +1,6 @@
 import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
-import { MessageKind } from "~/enums/chat/MessageKind";
-import { IChatMessage } from "~/interfaces/chat/IChatMessage";
+import { MessageKind } from "~/api/message/enums/chat/MessageKind";
+import { IChatMessage } from "~/api/message/interfaces/IMessage";
 import { ChatContainer } from "~/modules/chat/components/chat-container/ChatContainer";
 import { ChatInput } from "~/modules/chat/components/chat-input/ChatInput";
 import { ChatMessages } from "~/modules/chat/components/chat-messages/ChatMessages";
@@ -28,7 +28,7 @@ const messages = [
     kind: MessageKind.USER,
     sentAt: new Date(),
   },
-  { 
+  {
     body: "I'm good, thanks for asking!",
     kind: MessageKind.BOT,
     sentAt: new Date(),
@@ -37,12 +37,10 @@ const messages = [
 
 export default function Index() {
   return (
-    <div>
-      <ChatContainer>
-        
-        <ChatMessages messages={messages} />
-        <ChatInput />
-      </ChatContainer>
-    </div>
+    <ChatContainer>
+
+      <ChatMessages messages={messages} />
+      <ChatInput />
+    </ChatContainer>
   );
 }

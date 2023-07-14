@@ -1,7 +1,7 @@
-import { IChatMessage } from "~/interfaces/chat/IChatMessage";
+import { IChatMessage } from "~/api/message/interfaces/IMessage";
 import styles from "./ChatMessage.module.css";
 import { formatDate } from "../../helpers";
-import { MessageKind } from "~/enums/chat/MessageKind";
+import { MessageKind } from "~/api/message/enums/chat/MessageKind";
 import classNames from "classnames";
 
 type ChatMessageProps = {

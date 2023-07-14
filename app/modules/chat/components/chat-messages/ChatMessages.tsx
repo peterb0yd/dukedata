@@ -1,4 +1,4 @@
-import { IChatMessage } from "~/interfaces/chat/IChatMessage";
+import { IChatMessage } from "~/api/message/interfaces/IMessage";
 import styles from "./ChatMessages.module.css";
 import { ChatMessage } from "../chat-message/ChatMessage";
 

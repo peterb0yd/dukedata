@@ -2,13 +2,10 @@
 .ChatInput {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  height: 3rem;
+  gap: 1rem;
   margin: 0 auto;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e0e0e0;
+  margin-top: 1rem;
+  height: 3rem;
   width: 100%;
 }
 

@@ -1,13 +1,15 @@
 
 .ChatContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 90%;
-  max-width: 1000px;
-  height: 500px;  
+  align-items: center;
   border: 1px solid var(--gray-secondary);
   border-radius: 5px;
-  margin: 40px auto;
+  margin: calc(5vh - 20px) auto;
   padding: 20px;
+  width: 90%;
+  height: 90vh; 
+  max-width: 1000px;
 }
