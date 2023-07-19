@@ -1,8 +1,14 @@
 import { InputHTMLAttributes } from 'react';
 import styles from './Input.module.css';
 
-export const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+}
+export const Input = ({ label, ...inputProps }: InputProps) => {
   return (
-    <input className={styles.Input} {...props} />
+    <label>
+      {label ? label : null}
+      <input className={styles.Input} {...inputProps} />
+    </label>
   );
 }

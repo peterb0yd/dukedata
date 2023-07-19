@@ -1,11 +1,10 @@
-import { IChatMessage } from "~/api/message/interfaces/IMessage";
 import styles from "./ChatMessage.module.css";
 import { formatDate } from "../../helpers";
-import { MessageKind } from "~/api/message/enums/chat/MessageKind";
 import classNames from "classnames";
+import { Message, MessageKind } from "@prisma/client";
 
 type ChatMessageProps = {
-  message: IChatMessage;
+  message: Message;
 }
 
 export const ChatMessage = ({ message }: ChatMessageProps) => {
@@ -14,7 +13,7 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
 
   return (
     <div className={classNames(styles.ChatMessage, msgClass)}>
-      <p className={styles.date}>{formatDate(message.sentAt)}</p>
+      <p className={styles.date}>{formatDate(message.createdAt)}</p>
       <p className={styles.body}>{message.body}</p>
     </div>
   );

@@ -1,9 +1,9 @@
-import { IChatMessage } from "~/api/message/interfaces/IMessage";
 import styles from "./ChatMessages.module.css";
 import { ChatMessage } from "../chat-message/ChatMessage";
+import { Message } from "@prisma/client";
 
 type ChatMessagesProps = {
-  messages: IChatMessage[];
+  messages: Message[];
 }
 
 export const ChatMessages = ({ messages }: ChatMessagesProps) => {
