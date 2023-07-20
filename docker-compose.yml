@@ -1,8 +1,13 @@
-version: '3'
+version: '3.7'
 services:
   db:
+    container_name: dukedata-postgres
     build: .
+    restart: unless-stopped
     ports:
-      - '5433:5432'
-    volumes:
-      - ./data:/var/lib/postgresql/data
+      - '5435:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

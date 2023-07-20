@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export const createMessageToMessageDto = (message: IMessageCreate) => {
 	return Prisma.validator<Prisma.MessageCreateInput>()({
-		body: message.body,
+		body: message.body.trim(),
 		kind: message.kind,
 	});
 };

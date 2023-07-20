@@ -9,10 +9,19 @@
   width: 100%;
 }
 
-.ChatInput input {
-  
+.ChatInput > form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
 }
 
-.ChatInput button {
+.ChatInput > form > input {
+  width: calc(80% - 1rem);
+}
 
+.ChatInput > form > button {
+  width: calc(20% - 1rem);
 }
