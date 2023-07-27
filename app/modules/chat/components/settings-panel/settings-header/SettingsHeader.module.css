@@ -1,4 +1,5 @@
 
+/** Settings Header **/
 .SettingsHeader {
   display: flex;
   gap: 1rem;
@@ -17,7 +18,8 @@
   opacity: 1;
 }
 
-.settingsIcon {
+/** Settings Icon **/
+.SettingsHeader > .settingsIcon {
   transition: transform 0.5s ease-out;
 }
 .SettingsHeader.isOpen > .settingsIcon {

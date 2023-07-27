@@ -1,4 +1,5 @@
 
+/** Settings Panel **/
 .SettingsPanel {
   display: flex;
   align-items: flex-start;
@@ -11,7 +12,8 @@
   background-color: var(--dark-gray-primary);
 }
 
-.menuContent {
+/** Settings Menu Content **/
+.SettingsPanel > .menuContent {
   display: flex;
   margin-top: 60px;
   align-items: flex-start;
@@ -23,11 +25,12 @@
   overflow: visible;
   white-space: nowrap;
 }
-.isOpen > .menuContent {
+.SettingsPanel.isOpen > .menuContent {
   opacity: 1;
 }
 
-.menuContent > h4 {
+/** Settings Content Header **/
+.SettingsPanel > .menuContent > h4 {
   color: var(--gray-primary);
   font-weight: normal;
 }

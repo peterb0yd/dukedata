@@ -1,3 +1,4 @@
+/** Input **/
 .Input {
 	width: 100%;
 	padding: 10px;
@@ -6,12 +7,14 @@
 	transition: border-color 0.3s ease-in-out;
 }
 
+/** Input Label **/
 .Input > p {
   font-size: 14px;
   margin-bottom: 0.2rem;
   color: var(--gray-secondary);
 }
 
+/** Input input **/
 .Input > input {
 	width: 100%;
   padding: 6px 4px;

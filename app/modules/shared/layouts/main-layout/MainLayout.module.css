@@ -1,15 +1,16 @@
 
+/** MainLayout **/
 .MainLayout {
     display: flex;
     flex-direction: row;
     min-height: 100vh; 
 }
-
 .MainLayout.isSettingsOpen {
     --settings-width: var(--settings-width-expanded);
 }
 
-.MainLayout main {
+/** MainLayout Content **/
+.MainLayout > main {
     display: flex;
     flex-direction: column;
     width: calc(100% - var(--settings-width));
