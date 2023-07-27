@@ -1,11 +1,14 @@
 import { Message, MessageKind } from "@prisma/client";
 import { ActionArgs, json, redirect, type LinksFunction, type V2_MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useState } from "react";
 import { createMessage, getMessages } from "~/api/modules/message/message.service";
 import { badRequest } from "~/api/utils/errors.server";
 import { ChatContainer } from "~/modules/chat/components/chat-container/ChatContainer";
 import { ChatInput } from "~/modules/chat/components/chat-input/ChatInput";
 import { ChatMessages } from "~/modules/chat/components/chat-messages/ChatMessages";
+import { SettingsPanel } from "~/modules/chat/components/settings-panel/SettingsPanel";
+import { MainLayout } from "~/modules/shared/layouts/main-layout/MainLayout";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -31,9 +34,11 @@ export default function Index() {
   const { messages } = useLoaderData();
 
   return (
-    <ChatContainer>
-      <ChatMessages messages={messages} />
-      <ChatInput />
-    </ChatContainer>
+    <MainLayout>
+      <ChatContainer>
+        <ChatMessages messages={messages} />
+        <ChatInput />
+      </ChatContainer>
+    </MainLayout>
   );
 }

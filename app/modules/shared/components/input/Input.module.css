@@ -1,18 +1,28 @@
-
 .Input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid var(--gray-secondary);
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease-in-out;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	outline: none;
+	transition: border-color 0.3s ease-in-out;
+}
+
+.Input > p {
+  font-size: 14px;
+  margin-bottom: 0.2rem;
+  color: var(--gray-secondary);
 }
 
 .Input > input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  font-size: 16px;
+	width: 100%;
+  padding: 6px 4px;
+  border: 1px solid var(--gray-secondary);
+	background-color: var(--gray-primary);
+	border-radius: 5px;
+	outline: none;
+	font-size: 16px;
+}
+.Input.light > input {
+	color: var(--dark-gray-primary);
+  border-color: var(--gray-secondary);
+	background-color: var(--gray-primary);
 }

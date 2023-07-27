@@ -1,0 +1,33 @@
+
+.SettingsPanel {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: var(--settings-width); 
+  padding: 30px;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+  background-color: var(--dark-gray-primary);
+}
+
+.menuContent {
+  display: flex;
+  margin-top: 60px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  opacity: 0;
+  width: 100%;
+  transition: opacity 0.3s ease-in-out;
+  overflow: visible;
+  white-space: nowrap;
+}
+.isOpen > .menuContent {
+  opacity: 1;
+}
+
+.menuContent > h4 {
+  color: var(--gray-primary);
+  font-weight: normal;
+}

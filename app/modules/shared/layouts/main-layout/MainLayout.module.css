@@ -1,0 +1,18 @@
+
+.MainLayout {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh; 
+}
+
+.MainLayout.isSettingsOpen {
+    --settings-width: var(--settings-width-expanded);
+}
+
+.MainLayout main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - var(--settings-width));
+    background-color: #f5f5f5;
+    transition: width 0.3s ease-in-out;
+}

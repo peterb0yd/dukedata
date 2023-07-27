@@ -1,0 +1,25 @@
+
+.SettingsHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.SettingsHeader:hover {
+  cursor: pointer;
+}
+.SettingsHeader > h3 {
+  opacity: 0;
+  color: var(--gray-primary);
+  transition: opacity 0.3s ease-in-out;
+  font-weight: normal;
+} 
+.SettingsHeader.isOpen > h3 {
+  opacity: 1;
+}
+
+.settingsIcon {
+  transition: transform 0.5s ease-out;
+}
+.SettingsHeader.isOpen > .settingsIcon {
+  transform: rotate(-360deg);
+}
