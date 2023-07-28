@@ -11,11 +11,11 @@
 
 .ChatMessage.person {
   align-self: flex-end;
-  background-color: var(--blue-primary);
+  background-color: var(--gold-primary);
 }
 .ChatMessage.person > .date,
 .ChatMessage.person > .body {
-  color: white;
+  color: black;
 }
 
 .ChatMessage.bot {

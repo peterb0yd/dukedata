@@ -1,18 +1,18 @@
 :root {
   /** Colors **/
-	--blue-primary: #127df0;
-	--blue-secondary: #6bb0fa;
-
   --gray-primary: #f5f5f5;
   --gray-secondary: #e0e0e0;
 
-  --dark-gray-primary: #130544;
-  --dark-gray-secondary: #0f033a;
+  --gold-primary: #e7bd33;
+  --gold-secondary: #d0a927;
+
+  --dark-purple-primary: #1a085a;
+  --dark-purple-secondary: #0f033a;
 
 
   /** Widths **/
-  --settings-width: 40px;
-  --settings-width-expanded: 300px;
+  --side-panel-width: 40px;
+  --side-panel-width-expanded: 300px;
 }
 
 * {

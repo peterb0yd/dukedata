@@ -1,14 +1,13 @@
-import { Message, MessageKind } from "@prisma/client";
-import { ActionArgs, json, redirect, type LinksFunction, type V2_MetaFunction } from "@remix-run/node";
+import { json, type V2_MetaFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useState } from "react";
-import { createMessage, getMessages } from "~/api/modules/message/message.service";
-import { badRequest } from "~/api/utils/errors.server";
+import { getMessages } from "~/api/api-modules/message/message.service";
 import { ChatContainer } from "~/modules/chat/components/chat-container/ChatContainer";
-import { ChatInput } from "~/modules/chat/components/chat-input/ChatInput";
+import { AddNewMessage } from "~/modules/chat/components/add-new-message/AddNewMessage";
 import { ChatMessages } from "~/modules/chat/components/chat-messages/ChatMessages";
-import { SettingsPanel } from "~/modules/chat/components/settings-panel/SettingsPanel";
 import { MainLayout } from "~/modules/shared/layouts/main-layout/MainLayout";
+import { getDataSources } from "~/api/api-modules/dataSource/dataSource.service";
+import { useState } from "react";
+import { SettingsPanel } from "~/modules/chat/components/settings-panel/SettingsPanel";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -17,27 +16,35 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
+export const loader: LoaderFunction = async () => {
   return json({
     messages: await getMessages(),
+    dataSources: await getDataSources(),
   })
 }
 
-export const action = async ({ request }: ActionArgs) => {
-  const form = await request.formData();
-  const body = form.get("body") as string;
-  await createMessage({ body, kind: MessageKind.USER });
-  return redirect('/');
-}
-
 export default function Index() {
-  const { messages } = useLoaderData();
+  const { messages, dataSources } = useLoaderData();
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+  const toggleSidePanel = () => {
+    setIsSidePanelOpen(!isSidePanelOpen);
+  }
 
   return (
-    <MainLayout>
+    <MainLayout
+      isSidePanelOpen={isSidePanelOpen}
+      sidePanel={
+        <SettingsPanel
+          isOpen={isSidePanelOpen}
+          toggleOpen={toggleSidePanel}
+          dataSources={dataSources}
+        />
+      }
+    >
       <ChatContainer>
         <ChatMessages messages={messages} />
-        <ChatInput />
+        <AddNewMessage />
       </ChatContainer>
     </MainLayout>
   );

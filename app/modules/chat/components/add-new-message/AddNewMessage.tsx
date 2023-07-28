@@ -1,26 +1,24 @@
 import { Button } from "~/modules/shared/components/button/Button"
 import { Input } from "~/modules/shared/components/input/Input";
-import styles from "./ChatInput.module.css";
+import styles from "./AddNewMessage.module.css";
 import { Form } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { useTransitionState } from "~/modules/shared/hooks/useTransitionState";
 
-export const ChatInput = () => {
+export const AddNewMessage = () => {
   const { isSubmitting } = useTransitionState();
   const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!isSubmitting) {
       formRef.current?.reset();
     }
   }, [isSubmitting]);
 
   return (
-    <div className={styles.ChatInput}>
-      <Form method="post" replace ref={formRef}>
-        <Input type="text" name="body" />
-        <Button>Send</Button>
-      </Form>
-    </div>
+    <Form className={styles.AddNewMessage} action="/messages" method="post" ref={formRef}>
+      <Input type="text" name="body" />
+      <Button>Send</Button>
+    </Form>
   );
 }

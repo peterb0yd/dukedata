@@ -18,7 +18,20 @@ model Message {
   kind      MessageKind
 }
 
+model DataSource {
+  id        Int            @id @default(autoincrement())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  name      String
+  kind      DataSourceKind
+  url       String
+}
+
 enum MessageKind {
   USER
   BOT
+}
+
+enum DataSourceKind {
+  DATABASE
 }

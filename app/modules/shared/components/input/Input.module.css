@@ -1,7 +1,7 @@
 /** Input **/
 .Input {
 	width: 100%;
-	padding: 10px;
+	padding: 10px 0;
 	box-sizing: border-box;
 	outline: none;
 	transition: border-color 0.3s ease-in-out;
@@ -25,7 +25,7 @@
 	font-size: 16px;
 }
 .Input.light > input {
-	color: var(--dark-gray-primary);
+	color: var(--dark-purple-primary);
   border-color: var(--gray-secondary);
 	background-color: var(--gray-primary);
 }

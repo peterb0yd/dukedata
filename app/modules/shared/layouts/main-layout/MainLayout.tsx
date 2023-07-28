@@ -4,28 +4,22 @@ import styles from './MainLayout.module.css';
 import classNames from 'classnames';
 
 type MainLayoutProps = {
+  isSidePanelOpen: boolean;
   children: React.ReactNode;
+  sidePanel?: React.ReactNode;
 };
 
-export const MainLayout = ({ children }: MainLayoutProps) => {
-  const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
-
-  const toggleSettingsOpen = () => {
-    setIsSettingsOpen(!isSettingsOpen);
-  };
+export const MainLayout = ({ children, sidePanel, isSidePanelOpen }: MainLayoutProps) => {
 
   return (
     <div className={classNames(
       styles.MainLayout, {
-        [styles.isSettingsOpen]: isSettingsOpen,
+        [styles.isSidePanelOpen]: isSidePanelOpen,
       })
     }
       >
       <main>{children}</main>
-      <SettingsPanel
-        isOpen={isSettingsOpen}
-        toggleSettingsOpen={toggleSettingsOpen}
-      />
+      {sidePanel ? sidePanel : null}
     </div>
   );
 }

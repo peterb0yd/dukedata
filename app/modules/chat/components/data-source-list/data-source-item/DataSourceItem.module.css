@@ -1,0 +1,27 @@
+
+/** Data Source Item **/
+.DataSourceItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  color: var(--gray-primary);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.DataSourceItem > .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid var(--gold-primary);
+  margin-right: 0.5rem;
+}
+.DataSourceItem.selected > .dot {
+  background-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px var(--gold-primary);
+}

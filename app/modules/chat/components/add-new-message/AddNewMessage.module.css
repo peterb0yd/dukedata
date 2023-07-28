@@ -1,0 +1,18 @@
+
+.AddNewMessage {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  height: 3rem;
+  width: 100%;
+}
+
+.AddNewMessage > input {
+  width: calc(80% - 1rem);
+}
+
+.AddNewMessage > button {
+  width: calc(20% - 1rem);
+}

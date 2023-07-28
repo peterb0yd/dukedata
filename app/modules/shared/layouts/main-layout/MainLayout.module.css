@@ -5,15 +5,15 @@
     flex-direction: row;
     min-height: 100vh; 
 }
-.MainLayout.isSettingsOpen {
-    --settings-width: var(--settings-width-expanded);
+.MainLayout.isSidePanelOpen {
+    --side-panel-width: var(--side-panel-width-expanded);
 }
 
 /** MainLayout Content **/
 .MainLayout > main {
     display: flex;
     flex-direction: column;
-    width: calc(100% - var(--settings-width));
+    width: calc(100% - var(--side-panel-width));
     background-color: #f5f5f5;
     transition: width 0.3s ease-in-out;
 }

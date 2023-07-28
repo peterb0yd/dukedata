@@ -1,0 +1,12 @@
+
+/** AddDataSource component styles **/
+.AddDataSource {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/** AddDataSource Header **/
+.AddDataSource > h3 {
+  color: var(--gold-primary);
+}

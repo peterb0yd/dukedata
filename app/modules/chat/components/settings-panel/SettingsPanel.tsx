@@ -2,13 +2,17 @@ import { Input } from "~/modules/shared/components/input/Input";
 import styles from "./SettingsPanel.module.css";
 import classNames from "classnames";
 import { SettingsHeader } from "./settings-header/SettingsHeader";
+import { AddDataSource } from "../add-new-data-source/AddDataSource";
+import { DataSourceList } from "../data-source-list/DataSourceList";
+import { DataSource } from "@prisma/client";
 
 type SettingsPanelProps = {
   isOpen: boolean;
-  toggleSettingsOpen: () => void;
+  dataSources: DataSource[];
+  toggleOpen: () => void;
 }
 
-export const SettingsPanel = ({ isOpen, toggleSettingsOpen }: SettingsPanelProps) => {
+export const SettingsPanel = ({ isOpen, dataSources, toggleOpen }: SettingsPanelProps) => {
 
   return (
     <div
@@ -21,13 +25,11 @@ export const SettingsPanel = ({ isOpen, toggleSettingsOpen }: SettingsPanelProps
     >
       <SettingsHeader
         isOpen={isOpen}
-        toggleSettingsOpen={toggleSettingsOpen}
+        toggleOpen={toggleOpen}
       />
       <div className={styles.menuContent}>
-        <Input
-          label="Database Connection URL"
-          light
-        />
+        <AddDataSource />
+        <DataSourceList dataSources={dataSources} />
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 
+/** Button component Styles */
 .Button {
-  background-color: var(--blue-primary);
-  border: 1px solid var(--blue-primary);
+  background-color: var(--dark-purple-primary);
+  border: 1px solid var(--dark-purple-primary);
   color: white;
   font-size: 16px;
   padding: 10px 20px;
@@ -10,6 +11,17 @@
   outline: none;
 }
 .Button:hover {
-  background-color: var(--blue-secondary);
-  border: 1px solid var(--blue-secondary);
+  background-color: var(--dark-purple-secondary);
+  border: 1px solid var(--dark-purple-secondary);
+}
+
+/** Button light component Styles **/
+.Button.light {
+  background-color: var(--gold-primary);
+  border: 1px solid var(--gold-primary);
+  color: black;
+}
+.Button.light:hover {
+  background-color: var(--gold-secondary);
+  border: 1px solid var(--gold-secondary);
 }

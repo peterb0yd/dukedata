@@ -4,14 +4,14 @@ import classNames from 'classnames';
 
 type SettingsHeaderProps = {
   isOpen: boolean;
-  toggleSettingsOpen: () => void;
+  toggleOpen: () => void;
 };
 
-export const SettingsHeader = ({ isOpen, toggleSettingsOpen }: SettingsHeaderProps) => {
+export const SettingsHeader = ({ isOpen, toggleOpen }: SettingsHeaderProps) => {
 
   return (
     <header
-      onClick={toggleSettingsOpen}
+      onClick={toggleOpen}
       className={classNames(
         styles.SettingsHeader,
         {
