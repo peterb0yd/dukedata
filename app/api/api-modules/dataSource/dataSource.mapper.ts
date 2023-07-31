@@ -5,6 +5,6 @@ export const createDataSourceToDataSourceDto = (dataSource: IDataSourceCreate) =
 	return Prisma.validator<Prisma.DataSourceCreateInput>()({
 		name: dataSource.name?.trim(),
     url: dataSource.url?.trim(),
-		kind: dataSource.kind,
+		client: dataSource.client,
 	});
 };

@@ -10,7 +10,6 @@
 }
 .SettingsHeader > h3 {
   opacity: 0;
-  color: var(--gray-primary);
   transition: opacity 0.3s ease-in-out;
   font-weight: normal;
 } 

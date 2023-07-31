@@ -4,24 +4,52 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  color: var(--gray-primary);
-  font-size: 1rem;
-  cursor: pointer;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  width: calc(100% - 1rem);
+  border-top: 1px solid var(--primary-color-dark);
+}
+.DataSourceItem:first-child {
+  border-top: none;
 }
 
-.DataSourceItem > .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid var(--gold-primary);
+/** Data Source Item Content **/
+.DataSourceItem > .allContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 86%;
+}
+
+/** Data Source Item Icon **/
+.DataSourceItem > .allContent > .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
   margin-right: 0.5rem;
 }
-.DataSourceItem.selected > .dot {
-  background-color: var(--gold-primary);
-  box-shadow: 0 0 0 2px var(--gold-primary);
+
+/** Data Source Text Content **/
+.DataSourceItem > .allContent > .textContent {
+  position: relative;
+  overflow: hidden;
+}
+
+/** Data Source Name **/
+.DataSourceItem > .allContent > .textContent > .name {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/** Data Source URL **/
+.DataSourceItem > .allContent > .textContent > .url {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
 }

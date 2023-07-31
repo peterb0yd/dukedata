@@ -15,8 +15,8 @@ export const Input = ({ label, light, ...inputProps }: InputProps) => {
       }
     )}
     >
-      {label ? <p>{label}</p> : null}
+      {label ? <p className={styles.label}>{label}</p> : null}
       <input {...inputProps} />
     </label>
-  );
+  )
 }

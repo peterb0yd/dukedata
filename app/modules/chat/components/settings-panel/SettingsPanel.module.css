@@ -1,15 +1,20 @@
 
 /** Settings Panel **/
 .SettingsPanel {
+  --panel-padding: 30px;
+
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
   width: var(--side-panel-width); 
-  padding: 30px;
-  overflow: hidden;
+  overflow-y: auto;
+  padding: var(--panel-padding);
+  height: calc(100vh - calc(var(--panel-padding) * 2));
   transition: width 0.3s ease-in-out;
-  background-color: var(--dark-purple-primary);
+  background-color: var(--tertiary-color);
+  border-left: 2px solid var(--quadrary-color);
+  box-shadow: 0 0 8px var(--quadrary-color);
 }
 
 /** Settings Menu Content **/
@@ -20,6 +25,7 @@
   justify-content: flex-start;
   flex-direction: column;
   opacity: 0;
+  gap: 3rem;
   width: 100%;
   transition: opacity 0.3s ease-in-out;
   overflow: visible;
@@ -31,6 +37,5 @@
 
 /** Settings Content Header **/
 .SettingsPanel > .menuContent > h4 {
-  color: var(--gray-primary);
   font-weight: normal;
 }

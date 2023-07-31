@@ -1,27 +1,23 @@
 
+:root {
+  --button-border-width: 2px;
+}
 /** Button component Styles */
 .Button {
-  background-color: var(--dark-purple-primary);
-  border: 1px solid var(--dark-purple-primary);
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
+  background-color: var(--quadrary-color-dark);
+  border: var(--button-border-width) solid var(--quadrary-color);
+  padding: calc(10px - var(--button-border-width)) 20px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .Button:hover {
-  background-color: var(--dark-purple-secondary);
-  border: 1px solid var(--dark-purple-secondary);
+  background-color: var(--quadrary-color);
+  box-shadow: 0 0 5px var(--quadrary-color);
 }
-
-/** Button light component Styles **/
-.Button.light {
-  background-color: var(--gold-primary);
-  border: 1px solid var(--gold-primary);
-  color: black;
-}
-.Button.light:hover {
-  background-color: var(--gold-secondary);
-  border: 1px solid var(--gold-secondary);
+.Button,
+.Button > p {
+  color: var(--text-color-light);
+  font-size: 16px;
 }

@@ -23,7 +23,7 @@ model DataSource {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
   name      String
-  kind      DataSourceKind
+  client    DataSourceClient
   url       String
 }
 
@@ -32,6 +32,8 @@ enum MessageKind {
   BOT
 }
 
-enum DataSourceKind {
-  DATABASE
+enum DataSourceClient {
+  POSTGRES
+  MYSQL
+  SQLITE
 }

@@ -11,7 +11,7 @@
 
 .ChatMessage.person {
   align-self: flex-end;
-  background-color: var(--gold-primary);
+  background-color: var(--secondary-color);
 }
 .ChatMessage.person > .date,
 .ChatMessage.person > .body {
@@ -20,7 +20,7 @@
 
 .ChatMessage.bot {
   align-self: flex-start;
-  background-color: var(--gray-primary);
+  background-color: var(--primary-color-dark);
 }
 .ChatMessage.bot > .date,
 .ChatMessage.bot > .body {
@@ -29,7 +29,7 @@
 
 .date {
   font-size: 0.8rem;
-  color: var(--gray-secondary);
+  color: var(--primary-color-dark);
 }
 
 .body {

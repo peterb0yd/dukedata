@@ -12,7 +12,6 @@ export const Button = ({ children, text, light }: ButtonProps) => {
     <button className={classNames(
       styles.Button,
       {
-        [styles.light]: light
       })
     }>
       {children ? children : <p>{text}</p>}

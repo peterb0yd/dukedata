@@ -1,8 +1,23 @@
 
-/** Data Source List **/
+/** Data Source List component container **/
 .DataSourceList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+/** Data Source Table **/
+.DataSourceList > .table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow: auto;
+  border: 4px solid var(--secondary-color-dark);
+  background-color: var(--primary-color);
+  border-radius: 5px;
 }

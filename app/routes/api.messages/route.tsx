@@ -15,4 +15,4 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
   return new Response(null, { status: StatusCodes.METHOD_NOT_ALLOWED })
 }
 
-export default function Messages() {};
+export default function MessagesAPIRoute() {};

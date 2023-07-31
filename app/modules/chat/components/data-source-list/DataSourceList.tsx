@@ -7,12 +7,15 @@ type DataSourceListProps = {
 };
 
 export const DataSourceList = ({ dataSources }: DataSourceListProps) => {
-  
-    return (
-      <div className={styles.DataSourceList}>
+
+  return (
+    <div className={styles.DataSourceList}>
+      <h3>Data Sources</h3>
+      <div className={styles.table}>
         {dataSources.map((dataSource, index) => (
           <DataSourceItem key={index} dataSource={dataSource} />
         ))}
       </div>
-    );
+    </div>
+  );
 };

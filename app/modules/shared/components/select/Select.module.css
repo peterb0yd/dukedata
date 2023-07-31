@@ -1,19 +1,19 @@
-/** Input **/
-.Input {
+/** Select **/
+.Select {
 	width: 100%;
 	margin: 2px 0;
 	outline: none;
 	transition: border-color 0.3s ease-in-out;
 }
 
-/** Input Label **/
-.Input > .label {
+/** Select Label **/
+.Select > .label {
   font-size: 14px;
   margin-bottom: 0.2rem;
 }
 
-/** Input input **/
-.Input > input {
+/** Select select **/
+.Select > select {
 	width: 100%;
   padding: 10px 8px;
   box-sizing: border-box;
@@ -24,7 +24,7 @@
 	font-size: 16px;
   color: var(--text-color-dark);
 }
-.Input.light > input {
+.Select.light > select {
   border-color: var(--primary-color-dark);
 	background-color: var(--primary-color);
 }

@@ -19,7 +19,7 @@ export const SettingsHeader = ({ isOpen, toggleOpen }: SettingsHeaderProps) => {
         }
       )}
     >
-      <SettingsIcon size='lg' fill='var(--gray-primary)' className={styles.settingsIcon} />
+      <SettingsIcon size='lg' fill='var(--text-color-dark)' className={styles.settingsIcon} />
       <h3>Settings</h3>
     </header>
   );

@@ -1,7 +1,7 @@
-import { DataSourceKind } from '@prisma/client';
+import { DataSourceClient } from '@prisma/client';
 
 export interface IDataSourceCreate {
   name: string;
   url: string;
-	kind: DataSourceKind;
+	client: DataSourceClient;
 }
