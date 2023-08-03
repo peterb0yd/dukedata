@@ -1,14 +1,17 @@
+import React, { Suspense } from "react";
 import styles from "./ChatMessages.module.css";
 import { ChatMessage } from "../chat-message/ChatMessage";
 import { Message } from "@prisma/client";
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import { IncomingBotResponse } from "../incoming-bot-response/IncomingBotResponse";
 
 type ChatMessagesProps = {
   messages: Message[];
+  botResponse?: string;
 }
 
-export const ChatMessages = ({ messages }: ChatMessagesProps) => {
+export const ChatMessages = ({ messages, botResponse }: ChatMessagesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasFirstScroll, setHasFirstScroll] = useState(false);
   const isVisible = Boolean(messages?.length) && hasFirstScroll;
@@ -24,7 +27,7 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
     if (!hasFirstScroll) {
       setHasFirstScroll(true);
     }
-  }, [messages]);
+  }, [messages, botResponse]);
 
   const renderMessages = () => {
     if (!messages.length) {
@@ -38,12 +41,17 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
 
   return (
     <div
-      className={classNames(styles.ChatMessages, { 
+      className={classNames(styles.ChatMessages, {
         [styles.isVisible]: isVisible,
       })}
       ref={containerRef}
     >
       {renderMessages()}
+      {botResponse && (
+        <Suspense fallback={<p>Loading...</p>}>
+          <IncomingBotResponse message={botResponse} />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { Response, json } from "@remix-run/node";
 import { ActionFunction } from "@remix-run/node";
-import { eventStream } from "remix-utils";
 import { StatusCodes } from "http-status-codes";
 import { getBotResponse } from "~/api/api-modules/openAI/openAI.service";
 import { RequestMethods } from "~/enums/requestMethods";

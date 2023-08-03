@@ -6,22 +6,15 @@ export const formatDate = (date: Date): string => {
 };
 
 
-export const processChatResponse = async ({ response, onChunk }: any) => {
-  const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
-  let string = "";
-  while (true) {
-    const stream = await reader.read();
-    if (stream.done) break;
-
-    const chunks = stream?.value;
-
-    for (let chunk of chunks) {
-      console.log({chunk})
-      // const content = chunk.choices[0].delta.content;
-      // if (!content) continue;
-      // string += chunk.choices[0].delta.content;
-      // onChunk(string);
-    }
-  }
-  return string;
+export const processBotResponse = async ({ response, onChunk }: any) => {
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
+    let chunk = await reader?.read();
+    let result = '';
+    while (!chunk?.done) {
+      const chunkData = decoder.decode(chunk?.value, { stream: true });
+      result += chunkData;
+      onChunk(result);
+      chunk = await reader?.read();
+    }  
 };

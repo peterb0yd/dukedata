@@ -1,0 +1,17 @@
+
+/** IncomingBotResponse component styles */
+.IncomingBotResponse {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 600px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: darkgray;
+}
+
+/** IncomingBotResponse text */
+.IncomingBotResponse > p {
+  color: white;
+}

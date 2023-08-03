@@ -45,7 +45,7 @@ export const getTableDescription = async (tableName: string) => {
     `,
 			},
 		],
-	});;
+	});
 };
 
 export const getBotResponse = async (message: string) => {
@@ -53,8 +53,19 @@ export const getBotResponse = async (message: string) => {
 	const openAI = getOpenAI();
 	return openAI.chat.completions.create({
 		model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: message }],
+		messages: [
+			{
+				role: 'user',
+				content: `
+        Provide data to be stored in a markdown table. You must make up the data but have be a realistic example for the provided query from the user. Do not provide any text that is not part of the table data.
+
+        Present the data in markdown format.
+
+        The query from the user is: ${message}
+      `,
+			},
+		],
 		stream: true,
-    n: 1,
+		n: 1,
 	});
 };

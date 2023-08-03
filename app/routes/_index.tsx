@@ -8,8 +8,7 @@ import { MainLayout } from "~/modules/shared/layouts/main-layout/MainLayout";
 import { getDataSources } from "~/api/api-modules/dataSource/dataSource.service";
 import { useState } from "react";
 import { SettingsPanel } from "~/modules/chat/components/settings-panel/SettingsPanel";
-import { MessageKind } from "@prisma/client";
-import { processChatResponse } from "~/modules/chat/helpers";
+import { processBotResponse } from "~/modules/chat/helpers";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -32,14 +31,10 @@ export const loader: LoaderFunction = async () => {
 export default function Index() {
   const { messages, dataSources } = useLoaderData();
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
-  const [responseData, setResponseData] = useState('');
+  const [botResponse, setBotResponse] = useState('');
 
   const toggleSidePanel = () => {
     setIsSidePanelOpen(!isSidePanelOpen);
-  }
-
-  const handleChunkData = (data: any) => {
-    console.log({data});
   }
 
   const onNewMessage = async (message: string) => {
@@ -47,25 +42,10 @@ export default function Index() {
       method: "POST",
       body: JSON.stringify(message),
     })
-    // read from stream
-    const reader = response.body?.getReader();
-    const decoder = new TextDecoder();
-    let chunk = await reader?.read();
-    let result = '';
-    while (!chunk?.done) {
-      const chunkData = decoder.decode(chunk?.value, { stream: true });
-      result += chunkData;
-      setResponseData(result);
-      console.log({chunkData})
-      chunk = await reader?.read();
-    }
-
-    // const res = await processChatResponse({
-    //   response,
-    //   onChunk: handleChunkData,
-    // });
-
-  
+    processBotResponse({
+      response,
+      onChunk: setBotResponse,
+    })
   }
 
   return (
@@ -80,10 +60,14 @@ export default function Index() {
       }
     >
       <ChatContainer>
-        <ChatMessages messages={messages} />
-        <AddNewMessage onNewMessage={onNewMessage} />
+        <ChatMessages
+          messages={messages}
+          botResponse={botResponse}
+        />
+        <AddNewMessage
+          onNewMessage={onNewMessage}
+        />
       </ChatContainer>
-      <p>{responseData}</p>
     </MainLayout>
   );
 }

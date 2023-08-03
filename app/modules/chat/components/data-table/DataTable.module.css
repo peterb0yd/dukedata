@@ -1,0 +1,72 @@
+.DataTable {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 2rem 0;
+	box-sizing: border-box;
+}
+
+.DataTable > .headerRow {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1rem 0.3rem;
+	gap: 0.5rem;
+	color: white;
+	border-bottom: 1px solid var(--primary-color);
+	background-color: var(--tertiary-color-dark);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.DataTable > .headerRow > .headerColumn {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.DataTable > .dataBody {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.DataTable > .dataBody > .dataRow {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	align-items: center;
+	padding: 0.5rem 0.3rem;
+	border-bottom: 1px solid var(--primary-color-dark);
+	background-color: var(--primary-color-dark);
+}
+.DataTable > .dataBody > .dataRow:nth-child(odd) {
+	background-color: var(--primary-color);
+}
+.DataTable > .dataBody > .dataRow:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.DataTable > .dataBody > .dataRow > .dataColumn {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0.5rem 0;
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--text-color-dark);
+}
