@@ -1,5 +1,4 @@
 import { DataSource, DataSourceClient } from '@prisma/client';
-import { DataSourceKnexClients } from './enums/datasourceClients';
 import knex, { Knex } from 'knex';
 import { getDataSourceKnexConfig } from './dataSource.helper';
 

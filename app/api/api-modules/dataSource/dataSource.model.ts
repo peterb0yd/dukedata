@@ -1,28 +1,25 @@
-import { ZDataSourceCreateSchema } from "./dataSource.schema";
-import { IDataSourceCreate } from "./interfaces/IDataSourceCreate";
+import { ZodDataSourceCreate } from "./dataSource.validator";
 import { createDataSourceToDataSourceDto } from "./dataSource.mapper";
 import db from "~/api/db";
+import { IDataSourceCreate } from "./interfaces/IDataSourceCreate";
 
 export default class DataSourceModel {
 
   constructor() {}
 
   static async create(dataSourceData: IDataSourceCreate) {
-    const data = ZDataSourceCreateSchema.parse(
+    const data = ZodDataSourceCreate.parse(
       createDataSourceToDataSourceDto(dataSourceData)
     );
-    const dataSource = await db.dataSource.create({ data });
-    return dataSource;
+    return db.dataSource.create({ data });
   }
 
   static async findMany() {
-    const dataSources = await db.dataSource.findMany();
-    return dataSources;
+    return db.dataSource.findMany();
   }
 
   static async deleteById(id: number) {
-    const dataSource = await db.dataSource.delete({ where: { id } });
-    return dataSource;
+    return db.dataSource.delete({ where: { id } });
   }
   
 }

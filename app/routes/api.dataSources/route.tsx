@@ -12,6 +12,7 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
       const form = await request.formData();
       const name = form.get("name") as string;
       const url = form.get("url") as string;
+      console.log(url);
       const client = form.get("client") as DataSourceClient;
       await createDataSource({ name, url, client });
       return redirect('/');

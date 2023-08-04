@@ -19,12 +19,24 @@ model Message {
 }
 
 model DataSource {
-  id        Int            @id @default(autoincrement())
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  name      String
-  client    DataSourceClient
-  url       String
+  id          Int              @id @default(autoincrement())
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  name        String
+  client      DataSourceClient
+  url         String
+  dataSchemas DataSchema[]
+}
+
+model DataSchema {
+  id           Int            @id @default(autoincrement())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  name         String
+  description  String
+  kind         DataSchemaKind
+  dataSourceId Int
+  dataSource   DataSource     @relation(fields: [dataSourceId], references: [id])
 }
 
 enum MessageKind {
@@ -36,4 +48,9 @@ enum DataSourceClient {
   POSTGRES
   MYSQL
   SQLITE
+}
+
+enum DataSchemaKind {
+  TABLE
+  DATABASE
 }

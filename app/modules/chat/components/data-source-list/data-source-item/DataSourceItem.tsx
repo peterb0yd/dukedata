@@ -19,7 +19,7 @@ export const DataSourceItem = ({ dataSource }: DataSourceItemProps) => {
           <p className={styles.url}>{dataSource.url}</p>
         </div>
       </div>
-      <Form action='/dataSources' method='delete'>
+      <Form action='/api/dataSources' method='delete'>
         <input type='hidden' name='id' value={dataSource.id} />
         <IconButton border>
           <DeleteIcon size='sm' fill='red' />
