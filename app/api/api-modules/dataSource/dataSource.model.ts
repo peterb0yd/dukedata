@@ -18,6 +18,13 @@ export default class DataSourceModel {
     return db.dataSource.findMany();
   }
 
+  // TODO: add where clause
+  static async findSelected() {
+    return db.dataSource.findFirst({ include: {
+      dataSchemas: true,
+    }}); 
+  }
+
   static async deleteById(id: number) {
     return db.dataSource.delete({ where: { id } });
   }

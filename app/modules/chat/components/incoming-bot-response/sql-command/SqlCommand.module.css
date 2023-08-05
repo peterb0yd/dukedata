@@ -1,0 +1,31 @@
+.SqlCommand {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: var(--primary-color-dark);
+	border-left: 10px solid var(--secondary-color);
+	width: calc(100% - 40px - 10px);
+  border-radius: 5px;
+}
+
+.SqlCommand > p {
+  display: block;
+  font-family: 'Courier New', Courier, monospace;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 140%;
+  word-break: break-all;
+}
+
+.SqlCommand > p > span {
+	color: var(--text-color-dark);
+  margin: 0 0.3rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+
+.SqlCommand .keyword {
+	color: var(--tertiary-color);
+	text-transform: uppercase;
+}

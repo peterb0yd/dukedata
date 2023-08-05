@@ -1,6 +1,7 @@
 import { DataSource, DataSourceClient } from '@prisma/client';
 import knex, { Knex } from 'knex';
 import { getDataSourceKnexConfig } from './dataSource.helper';
+import { convertSqlToJson } from '~/api/utils/helpers.server';
 
 let connections: Record<string, Knex<any, unknown[]>> = {};
 
@@ -58,7 +59,7 @@ export default class DataSourceConnectorService {
           table_schema = 'public'
       AND table_type = 'BASE TABLE';
     `);
-		return schema.rows;
+		return convertSqlToJson(schema.rows);
 	}
 
   async getTableSchema(tableName: string): Promise<any> {
@@ -68,6 +69,6 @@ export default class DataSourceConnectorService {
       FROM information_schema.columns
       WHERE table_name = '${tableName}';
     `);
-    return schema.rows;
+    return convertSqlToJson(schema.rows);
   }
 }

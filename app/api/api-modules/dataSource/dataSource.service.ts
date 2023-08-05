@@ -4,25 +4,33 @@ import { IDataSourceCreate } from './interfaces/IDataSourceCreate';
 import { createDataSchemasForDataSource } from '../dataSchema/dataSchema.service';
 
 export const createDataSource = async (dataSourceData: IDataSourceCreate) => {
-  console.log({dataSourceData})
   const dataSource = await DataSourceModel.create(dataSourceData);
   const connectorService = new DataSourceConnectorService(dataSource);
   await connectorService.connect();
   const dataBaseSchema = await connectorService.getSchema();
-  const tableSchemas: Array<Record<string, string>> = [];
-  await Promise.all(dataBaseSchema.map(async (table: any) => {
-    const tableSchema = await connectorService.getTableSchema(table);
-    tableSchemas.push({ name: table?.table_name ?? 'no-name', schema: JSON.stringify(tableSchema) });
-  }));
+  const tableSchemas = await getTableSchemas(connectorService, dataBaseSchema);
   await connectorService.disconnect();
   await createDataSchemasForDataSource(dataSource, dataBaseSchema, tableSchemas);
   return dataSource;
 }
 
-export const getDataSources = async () => {
+export const getSelectedDataSource = () => {
+  return DataSourceModel.findSelected();
+}
+
+export const getDataSources = () => {
   return DataSourceModel.findMany();
 }
 
-export const deleteDataSource = async (id: number) => {
+export const deleteDataSource = (id: number) => {
   return DataSourceModel.deleteById(id);
+}
+
+const getTableSchemas = async (connectorService: DataSourceConnectorService, dataBaseSchema: Array<Record<string, any>>) => {
+  const tableSchemas: Array<Record<string, string>> = [];
+  await Promise.all(dataBaseSchema.map(async (table: Record<string, any>) => {
+    const tableSchema = await connectorService.getTableSchema(table.tableName);
+    tableSchemas.push({ name: table.tableName, schema: JSON.stringify(tableSchema) });
+  }));
+  return tableSchemas;
 }
