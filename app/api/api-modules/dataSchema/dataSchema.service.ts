@@ -12,14 +12,17 @@ export const createDataSchemasForDataSource = async (
 	databaseSchema: string,
 	tableSchemas: Array<Record<'name'|'schema', string>>,
 ) => {
-	await createDataSchema({
+	const dataSchemaPromises = [];
+  dataSchemaPromises.push(
+  createDataSchema({
 		name: dataSource.name,
 		description: JSON.stringify({ schema: databaseSchema }),
 		dataSourceId: dataSource.id,
 		kind: DataSchemaKind.DATABASE,
-	});
-	await Promise.all(
-		tableSchemas.map(({ name, schema }: Record<'name'|'schema', string>) => {
+	})
+  );
+  dataSchemaPromises.push(
+    ...tableSchemas.map(({ name, schema }: Record<'name'|'schema', string>) => {
 			return createDataSchema({
 				name,
 				description: schema,
@@ -27,5 +30,10 @@ export const createDataSchemasForDataSource = async (
 				kind: DataSchemaKind.TABLE,
 			});
 		})
-	);
+  );
+  return Promise.all(dataSchemaPromises);
 };
+
+export const deleteSchemasForDataSource = async (dataSource: DataSource) => {
+  return DataSchemaModel.deleteByDataSourceId(dataSource.id);
+}

@@ -1,6 +1,10 @@
 import OpenAI from 'openai';
 import { getSelectedDataSource } from '../dataSource/dataSource.service';
 import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
+import { queryDataSchemaEmbeddings } from '../chroma/chroma.service';
+import { DataSchemaKind } from '@prisma/client';
+import DataSchemaModel from '../dataSchema/dataSchema.model';
+import { fulfilledPromiseValues } from '~/api/utils/promise.server';
 
 let openAIService: OpenAI;
 
@@ -12,6 +16,17 @@ const getOpenAI = () => {
 		});
 	}
 	return openAIService;
+};
+
+export const getEmbeddings = async (text: string) => {
+	const openAI = getOpenAI();
+	console.log({ text });
+	const result = await openAI.embeddings.create({
+		input: text,
+		model: 'text-embedding-ada-002',
+	});
+	console.log({ result });
+	return result.data[0].embedding;
 };
 
 export const getSchemaDescription = async (tableSchema: string) => {
@@ -58,38 +73,76 @@ export const getBotResponse = async (message: string) => {
 			error: 'No data source selected',
 		};
 	}
-	const tableSchemas = selectedDataSource?.dataSchemas.filter(
-		(dataSchema) => dataSchema.kind === 'TABLE'
+	const databaseSchema = selectedDataSource.dataSchemas.find(
+		(dataSchema) => dataSchema.kind === DataSchemaKind.DATABASE
 	);
-	const messages: Array<CreateChatCompletionRequestMessage> = tableSchemas.map((tableSchema) => {
-		return {
-			role: 'user',
-			content: `This is the table Schema for ${tableSchema.name}: ${tableSchema.description}
-      
-      Take note of any joins that you may need to make in your SQL query.
-      `,
-		};
-	});
-	messages.push({
-		role: 'user',
-		content: `
-      Use the previous table schemas as a reference in order to provide a POSTGRES query that will satisfy the user's request as best as possible. Make sure to check for any likely join tables where a table name includes two other table names. You can provide a brief explanation of the query if you would like. Do not make up an answer. If you do not know the answer, you can say "I couldn't generate a query to satisfy your request. Please try asking the question a different way or adding specific data in your request.".
-      
-      Present the POSTGRES query in the following format: 
+	const tableListResult = await openAI.chat.completions.create(
+		{
+			model: 'gpt-3.5-turbo-16k',
+			messages: [{
+        role: `user`,
+        content: `
+          Given a database schema including all known tables belonging to the database, which tables will most likely be required to answer the user's question provided below. Do not include any natural language in your response. Only provide a valid JSON result in this format where the array of tableNames are a list of valid table names from the database schema:
 
-      \`\`\`sql
-        <POSTGRES Query>
-      \`\`\`end
+          ["tableA", "tableB", "etc"]
+          }
 
-      The request from the user is: ${message}
-    `,
-	});
-	return openAI.chat.completions.create({
-		model: 'gpt-3.5-turbo-16k',
-		messages,
-		stream: true,
-		n: 1,
-	}, {
-    maxRetries: 3,
-  });
+          Here are the database schema: ${databaseSchema?.description}
+
+          Here is the user's question: ${message}
+        `,
+      }],
+			n: 1,
+		},
+		{
+			maxRetries: 3,
+		}
+	);
+  const likelyTables = JSON.parse(tableListResult.choices[0].message.content as string);
+  const tableSchemaPromises = likelyTables.map((tableName: string) => {
+    return DataSchemaModel.findByTableName(tableName);
+  })
+  const tableSchemas = fulfilledPromiseValues(
+    await Promise.allSettled(tableSchemaPromises)
+  );
+  console.log({tableSchemas});
+  return;
+	// const results = await queryDataSchemaEmbeddings(selectedDataSource, message);
+	// const messages = [];
+	// for (let result of results) {
+	// 	console.log(JSON.stringify(result, null, 2));
+	// }
+	// return 'TESTING';
+	// // const messages: Array<CreateChatCompletionRequestMessage> = results.map((embeddings: any) => {
+	// // 	return {
+	// // 		role: 'user',
+	// // 		content: `Context: ${JSON.stringify(embeddings.metadata)} ${embeddings.document} `,
+	// // 	};
+	// // });
+	// messages.push({
+	// 	role: 'user',
+	// 	content: `
+  //     Use the previous context as a reference in order to provide a POSTGRES query that will satisfy the user's request as best as possible. Make sure to check for any likely join tables where a table name includes two other table names. You can provide a brief explanation of the query if you would like. Do not make up an answer. If you do not know the answer, you can say "I couldn't generate a query to satisfy your request. Please try asking the question a different way or adding specific data in your request.".
+      
+  //     Present the POSTGRES query in the following format: 
+
+  //     \`\`\`sql
+  //       <POSTGRES Query>
+  //     \`\`\`end
+
+  //     The request from the user is: ${message}
+  //   `,
+	// });
+	// console.log({ messages });
+	// return openAI.chat.completions.create(
+	// 	{
+	// 		model: 'gpt-3.5-turbo-16k',
+	// 		messages,
+	// 		stream: true,
+	// 		n: 1,
+	// 	},
+	// 	{
+	// 		maxRetries: 3,
+	// 	}
+	// );
 };

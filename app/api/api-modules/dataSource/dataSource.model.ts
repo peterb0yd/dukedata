@@ -18,6 +18,10 @@ export default class DataSourceModel {
     return db.dataSource.findMany();
   }
 
+  static async findById(id: number) {
+    return db.dataSource.findUnique({ where: { id } });
+  }
+
   // TODO: add where clause
   static async findSelected() {
     return db.dataSource.findFirst({ include: {

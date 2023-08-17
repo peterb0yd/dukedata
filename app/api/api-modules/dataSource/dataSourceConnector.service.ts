@@ -71,4 +71,14 @@ export default class DataSourceConnectorService {
     `);
     return convertSqlToJson(schema.rows);
   }
+
+  async getTableRowSamples(tableName: string): Promise<any> {
+    const connection = getOrCreateSharedConnection(this.dataSource);
+    const rows = await connection
+      .select('*')
+      .from(tableName) 
+      .limit(5);
+    console.log(rows);
+    return convertSqlToJson(rows);
+  }
 }
