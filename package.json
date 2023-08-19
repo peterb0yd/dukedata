@@ -5,6 +5,7 @@
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build",
+    "db:migrate": "npx prisma migrate dev",
     "typecheck": "tsc"
   },
   "dependencies": {
