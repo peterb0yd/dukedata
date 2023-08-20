@@ -72,13 +72,17 @@ export default class DataSourceConnectorService {
     return convertSqlToJson(schema.rows);
   }
 
-  async getTableRowSamples(tableName: string): Promise<any> {
+  async getTableRowSamples(tableName: string): Promise<string> {
     const connection = getOrCreateSharedConnection(this.dataSource);
     const rows = await connection
       .select('*')
       .from(tableName) 
-      .limit(5);
-    console.log(rows);
-    return convertSqlToJson(rows);
+      .limit(2);
+    const data = convertSqlToJson(rows);
+    return `
+      sample rows for ${tableName}:
+
+      ${data}
+    `;
   }
 }

@@ -7,6 +7,7 @@ export default class DataSchemaModel {
 	constructor() {}
 
 	static async create(dataSchemaData: IDataSchemaCreate) {
+    console.log({dataSchemaData});
 		const data = ZodDataSchemaCreate.parse(createDataSchemaToDataSchemaDto(dataSchemaData));
 		return db.dataSchema.create({ data });
 	}
