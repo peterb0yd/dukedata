@@ -11,17 +11,19 @@ import {
 } from '../chroma/chroma.service';
 import { fulfilledPromiseValues } from '../../utils/promise.server';
 import { DataSchema, DataSource } from '@prisma/client';
+import { IDataSchemaCreate } from '../dataSchema/interfaces/IDataSchemaCreate';
+import { sampleRowsToSampleDocument, tableSchemaToDefinitionDocument } from './dataSource.mapper';
 
 export const createDataSource = async (dataSourceData: IDataSourceCreate) => {
 	const dataSource = await DataSourceModel.create(dataSourceData);
 	const connectorService = new DataSourceConnectorService(dataSource);
 	await connectorService.connect();
-	const dataBaseSchema = await connectorService.getSchema();
-	const tableSchemas = await getTableSchemas(connectorService, dataBaseSchema);
+	const databaseTables = await connectorService.getDatabaseSchema();
+	const tableSchemas = await getTableSchemas(connectorService, databaseTables);
 	await connectorService.disconnect();
 	const dataSchemas = await createDataSchemasForDataSource(
 		dataSource,
-		dataBaseSchema,
+		databaseTables,
 		tableSchemas
 	);
 	await createDataSchemaEmbeddings(dataSource, dataSchemas);
@@ -47,28 +49,29 @@ export const deleteDataSource = async (id: number) => {
 };
 
 export const getSampleRows = async (dataSource: DataSource, dataSchema: DataSchema) => {
-  const connectorService = new DataSourceConnectorService(dataSource);
+	const connectorService = new DataSourceConnectorService(dataSource);
 	await connectorService.connect();
-  const sampleRows = connectorService.getTableRowSamples(dataSchema.name);
+	const sampleRows = connectorService.getTableRowSamples(dataSchema.name);
 	await connectorService.disconnect();
-  return sampleRows;
-}
+	return sampleRows;
+};
 
 const getTableSchemas = async (
 	connectorService: DataSourceConnectorService,
 	dataBaseSchema: Array<Record<string, any>>
 ) => {
-	const tableSchemas: Array<Record<string, string>> = [];
-	const results = await Promise.allSettled(
-		dataBaseSchema.map(async (table: Record<string, any>) => {
-			const schema = await connectorService.getTableSchema(table.tableName);
-      console.log({schema});
+	const tableSchemas: Array<Partial<IDataSchemaCreate>> = [];
+	await Promise.allSettled(
+		dataBaseSchema.map(async (table) => {
+      const { tableName } = table;
+			const definition = await connectorService.getTableSchema(tableName);
+			const sample = await connectorService.getTableRowSamples(tableName);
 			tableSchemas.push({
 				name: table.tableName,
-				schema,
+				definition: tableSchemaToDefinitionDocument(tableName, definition),
+				sample: sampleRowsToSampleDocument(tableName, sample),
 			});
 		})
 	);
-	return fulfilledPromiseValues(results);
+	return tableSchemas as Array<IDataSchemaCreate>;
 };
-

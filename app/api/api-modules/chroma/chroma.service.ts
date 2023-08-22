@@ -4,6 +4,7 @@ import { ChromaEmbeddingFunction } from './chroma.embedding';
 import { getEmbeddings } from '../openAI/openAI.service';
 import { fulfilledPromiseValues } from '~/api/utils/promise.server';
 import { getSampleRows } from '../dataSource/dataSource.service';
+import { IDataSchemaWithEmbeddings } from '../dataSchema/interfaces/IDataSchemaWithEmbeddings';
 const client = new ChromaClient();
 let embeddingFunction: IEmbeddingFunction;
 
@@ -23,22 +24,29 @@ export const createDataSchemaEmbeddings = async (
 		const collection = await client.createCollection({
 			name: dataSource.name,
 		});
-		const ids = [], metadatas = [], documents = [], embeddings = [];
+		const ids = [] as Array<string>,
+			metadatas = [] as Array<Record<string, string>>,
+			documents = [] as Array<string>,
+			embeddings = [] as Array<number>;
 		const dataSchemasPromise = dataSchemas.map(async (dataSchema) => {
-      const obj = Object.assign({}, dataSchema as any);
-			obj.embeddings = await getEmbeddings(dataSchema.description);
-      obj.samples = await getSampleRows(dataSource, dataSchema);
-      return obj;
+			const ds = Object.assign({}, dataSchema as IDataSchemaWithEmbeddings);
+			const definitionEmbeddings = await getEmbeddings(dataSchema.definition);
+			const sampleEmbeddings = await getEmbeddings(dataSchema.sample);
+			ds.embeddings = {
+				definition: definitionEmbeddings,
+				sample: sampleEmbeddings,
+			};
+			return ds;
 		});
 		const dataSchemasData = fulfilledPromiseValues(await Promise.allSettled(dataSchemasPromise));
-		for (const dataSchemaData of dataSchemasData) {
-			ids.push(String(dataSchemaData.id));
-			metadatas.push({ schemaName: dataSchemaData.name, kind: dataSchemaData.kind });
-			documents.push(JSON.stringify({ 
-        description: dataSchemaData.description, 
-        samples: dataSchemaData.samples 
-      }));
-      embeddings.push(dataSchemaData.embeddings || []);
+		for (const data of dataSchemasData) {
+			// add embeddings for the schema 'sample' and 'definition' to chroma
+			Object.keys(data.embeddings).forEach((key) => {
+				ids.push(`${data.id}-${key}`);
+				metadatas.push({ tableName: data.name, kind: data.kind });
+				documents.push(data[key]);
+				embeddings.push(data.embeddings[key] || []);
+			});
 		}
 		collection.add({
 			ids,
@@ -52,17 +60,21 @@ export const createDataSchemaEmbeddings = async (
 	}
 };
 
-export const queryDataSchemaEmbeddings = async (dataSource: DataSource, text: string) => {
+export const queryDataSchemaEmbeddings = async (
+	dataSource: DataSource,
+	text: string,
+	where?: Record<string, string>
+) => {
 	const collection = await client.getCollection({
 		name: dataSource.name,
 		embeddingFunction: getEmbeddingFunction(),
 	});
-	console.log({ collection });
+  const whereProp = where ? { where } : {};
 	const result = await collection.query({
-		queryTexts: [text],
 		nResults: 3,
+		queryTexts: [text],
+    ...whereProp,
 	});
-	console.log({ result });
 	const results = [];
 	for (let i = 0; i < result.ids.length; i++) {
 		results.push({

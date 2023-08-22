@@ -7,12 +7,16 @@ import { RequestMethods } from "~/enums/requestMethods";
 export const action: ActionFunction = async ({ request }) => {
   if (request.method === RequestMethods.POST) {
     const message = await request.json();
-    const stream = await getBotResponse(message);
+    const response = await getBotResponse(message);
+
+    if (typeof response === 'string') {
+      return json(response, { status: StatusCodes.OK });
+    }
 
     // ReadableStream from stream
     const readableStream = new ReadableStream({
       async start(controller) {
-        for await (const chunk of stream) {
+        for await (const chunk of response) {
           const bytes = new TextEncoder().encode(chunk.choices[0].delta.content ?? '');
           controller.enqueue(bytes);
         }

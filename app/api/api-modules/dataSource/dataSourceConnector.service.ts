@@ -50,7 +50,7 @@ export default class DataSourceConnectorService {
 		}
 	}
 
-	async getSchema(): Promise<any> {
+	async getDatabaseSchema(): Promise<Array<Record<string, any>>> {
 		const connection = getOrCreateSharedConnection(this.dataSource);
 		const schema = await connection.raw(`
       SELECT table_name
@@ -59,30 +59,25 @@ export default class DataSourceConnectorService {
           table_schema = 'public'
       AND table_type = 'BASE TABLE';
     `);
-		return convertSqlToJson(schema.rows);
+    return convertSqlToJson(schema.rows);
 	}
 
-  async getTableSchema(tableName: string): Promise<any> {
+  async getTableSchema(tableName: string): Promise<Array<Record<string, any>>> {
     const connection = getOrCreateSharedConnection(this.dataSource);
-    const schema = await connection.raw(`
+    const res = await connection.raw(`
       SELECT column_name, data_type
       FROM information_schema.columns
       WHERE table_name = '${tableName}';
     `);
-    return convertSqlToJson(schema.rows);
+    return convertSqlToJson(res.rows);
   }
 
-  async getTableRowSamples(tableName: string): Promise<string> {
+  async getTableRowSamples(tableName: string): Promise<Array<Record<string, any>>> {
     const connection = getOrCreateSharedConnection(this.dataSource);
-    const rows = await connection
+    const res = await connection
       .select('*')
       .from(tableName) 
       .limit(2);
-    const data = convertSqlToJson(rows);
-    return `
-      sample rows for ${tableName}:
-
-      ${data}
-    `;
+    return convertSqlToJson(res);
   }
 }

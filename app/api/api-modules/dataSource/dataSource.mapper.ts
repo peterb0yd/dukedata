@@ -4,7 +4,21 @@ import { IDataSourceCreate } from './interfaces/IDataSourceCreate';
 export const createDataSourceToDataSourceDto = (dataSource: IDataSourceCreate) => {
 	return Prisma.validator<Prisma.DataSourceCreateInput>()({
 		name: dataSource.name?.trim(),
-    url: dataSource.url?.trim(),
+		url: dataSource.url?.trim(),
 		client: dataSource.client,
 	});
+};
+
+export const tableSchemaToDefinitionDocument = (
+	tableName: string,
+	schemaDefinition: Array<Record<string, any>>
+) => {
+	return JSON.stringify({ [`${tableName}-defition`]: schemaDefinition });
+};
+
+export const sampleRowsToSampleDocument = (
+	tableName: string,
+	sampleRows: Array<Record<string, any>>
+) => {
+	return JSON.stringify({ [`${tableName}-samples`]: sampleRows });
 };

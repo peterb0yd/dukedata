@@ -1,24 +1,24 @@
 
-adventure-works-db
-postgresql://postgres:postgres@localhost:5436/postgres
+# world
+postgresql://postgres:pgpassword@localhost:5447/postgres
 
-chinook-db
-postgresql://postgres:postgres@localhost:5437/postgres
+# usda
+postgresql://postgres:pgpassword@localhost:5446/postgres
 
-dell-store-db
-postgresql://postgres:postgres@localhost:5438/postgres
+# role-based-access-control
+postgresql://postgres:pgpassword@localhost:5445/postgres
 
-french-towns-communes-francaises-db
-postgresql://postgres:postgres@localhost:5439/postgres
+# iso-3166
+postgresql://postgres:pgpassword@localhost:5444/postgres
 
-iso-3166-db
-postgresql://postgres:postgres@localhost:5440/postgres
+# french-towns-communes-francaises
+postgresql://postgres:pgpassword@localhost:5443/postgres
 
-role-based-access-control-db
-postgresql://postgres:postgres@localhost:5441/postgres
+# dell-store
+postgresql://postgres:pgpassword@localhost:5442/postgres
 
-usda-db
-postgresql://postgres:postgres@localhost:5442/postgres
+# chinook
+postgresql://postgres:pgpassword@localhost:5441/postgres
 
-world-db
-postgresql://postgres:postgres@localhost:5443/postgres
+# adventure-works
+postgresql://postgres:pgpassword@localhost:5440/postgres

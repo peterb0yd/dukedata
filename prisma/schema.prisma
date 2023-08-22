@@ -33,7 +33,8 @@ model DataSchema {
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   name         String
-  description  String
+  definition   String
+  sample       String
   kind         DataSchemaKind
   dataSourceId Int
   dataSource   DataSource     @relation(fields: [dataSourceId], references: [id])
