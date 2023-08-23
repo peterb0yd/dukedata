@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://e7.pngegg.com/pngimages/946/848/png-clipart-gray-wolf-symbol-pack-symbol-miscellaneous-logo.png" 
+  <img src="https://cdn.vectorstock.com/i/preview-1x/55/60/simple-wolf-head-line-art-vector-34405560.jpg" 
   />
  </p>
 
