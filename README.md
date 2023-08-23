@@ -1,12 +1,9 @@
-# DukeData: SQL Generator Documentation 📘
+<center># DukeData 📘</center>
 
-## 🌟 Introduction
+<center>Convert user prompts to SQL commmands and run them</center>
+<center>(still a work-in-progress)</center>
 
-DukeData is an innovative open-source project that leverages the power of OpenAI's GPT model to automatically generate SQL queries. This enables users, even without technical backgrounds, to easily extract relevant data from their databases by simply asking questions! Currently, DukeData primarily supports Postgres databases, with plans to expand to MySQL and BigQuery in the near future.
-
----
-
-## 📋 Table of Contents
+### 📋 Table of Contents
 
 1. [Getting Started](#getting-started)
     * [Requirements](#requirements)
@@ -18,8 +15,6 @@ DukeData is an innovative open-source project that leverages the power of OpenAI
 6. [Contributing to DukeData](#contributing-to-dukedata)
 7. [License and Credits](#license-and-credits)
 8. [Contact and Support](#contact-and-support)
-
----
 
 ## 🚀 Getting Started <a name="getting-started"></a>
 
@@ -36,8 +31,6 @@ DukeData is an innovative open-source project that leverages the power of OpenAI
 3. Run `make setup`.
 4. Once setup completes, open your browser and navigate to `localhost:3000` to start using DukeData.
 
----
-
 ## 🎓 How to Use DukeData <a name="how-to-use-dukedata"></a>
 
 Once DukeData is running in your browser:
@@ -45,22 +38,16 @@ Once DukeData is running in your browser:
 2. Simply type in your question or data request.
 3. Review the generated SQL query and execute it to retrieve your data.
 
----
-
 ## 🗄️ Supported Databases <a name="supported-databases"></a>
 
-* **Postgres**: Fully Supported
+* **Postgres**: Mostly Supported
 * **MySQL**: Coming soon...
 * **BigQuery**: In the pipeline...
-
----
 
 ## 🛣️ Future Roadmap <a name="future-roadmap"></a>
 
 * Support for MySQL.
 * Support for BigQuery.
-
----
 
 ## ❓ Troubleshooting and FAQs <a name="troubleshooting-and-faqs"></a>
 
@@ -69,24 +56,15 @@ Once DukeData is running in your browser:
 * **Q**: The generated SQL query doesn't seem right. What should I do?
   * **A**: Please report the issue to our support team. Your feedback helps us improve!
 
----
-
 ## 💼 Contributing to DukeData <a name="contributing-to-dukedata"></a>
 
 We appreciate all forms of feedback and suggestions! Feel free to reach out or review our contribution guidelines.
-
----
 
 ## 📜 License and Credits <a name="license-and-credits"></a>
 
 DukeData is open-source software. It's licensed under the MIT license. Special thanks to our incredible community and users!
 
----
-
 ## 💌 Contact and Support <a name="contact-and-support"></a>
 
-For any questions, feedback, or support inquiries, please reach out to our team at `support@dukedata.io`.
+For any questions, feedback, or support inquiries, please reach out to our team at `peterboyd192@gmail.com`.
 
----
-
-_🌐 Happy Querying with DukeData!_ 🚀🎉
