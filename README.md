@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://w7.pngwing.com/pngs/453/375/png-transparent-olde-english-bulldogge-bulldog-breeds-silver-wolf-nutrition-llc-welcome-to-the-family-hadaj-taima-restaurant-wolf-avatar-mammal-cat-like-mammal-carnivoran.png" 
+  <img src="https://e7.pngegg.com/pngimages/946/848/png-clipart-gray-wolf-symbol-pack-symbol-miscellaneous-logo.png" 
   />
  </p>
 
