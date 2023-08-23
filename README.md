@@ -1,4 +1,6 @@
-<h1 align="center">DukeData 📘</h1>
+<img src="https://png.pngtree.com/png-vector/20230120/ourmid/pngtree-veterinary-logo-design-dog-clipart-corgi-puppy-png-image_6565448.png" align="center" />
+
+<h1 align="center">DukeData</h1>
 
 <p align="center">Convert user prompts to SQL commmands and run them</p>
 <p align="center">(still a work-in-progress)</p>
