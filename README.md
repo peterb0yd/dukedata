@@ -1,4 +1,4 @@
-<center># DukeData 📘</center>
+<h1 align="center"># DukeData 📘</h1>
 
 <center>Convert user prompts to SQL commmands and run them</center>
 <center>(still a work-in-progress)</center>
