@@ -1,6 +1,7 @@
-<img src="https://png.pngtree.com/png-vector/20230120/ourmid/pngtree-veterinary-logo-design-dog-clipart-corgi-puppy-png-image_6565448.png" 
-  style="margin: 0 auto;margin-top:-10px;margin-bottom:-10px;"
- />
+<p align="center">
+  <img src="https://png.pngtree.com/png-vector/20230120/ourmid/pngtree-veterinary-logo-design-dog-clipart-corgi-puppy-png-image_6565448.png" 
+  />
+ </p>
 
 <h1 align="center">DukeData</h1>
 
