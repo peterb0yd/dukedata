@@ -5,14 +5,14 @@
 
 <h1 align="center">DukeData</h1>
 
-<p align="center">Convert user prompts to SQL commmands and run them</p>
-<p align="center">(still a work-in-progress)</p>
+<p align="center">Convert user prompts to SQL commmands and run them locally.</p>
+<p align="center">(work-in-progress)</p>
 
 ## 📋 Table of Contents
 
 1. [Getting Started](#getting-started)
-    * [Requirements](#requirements)
-    * [Installation and Setup](#installation)
+   - [Requirements](#requirements)
+   - [Installation and Setup](#installation)
 2. [How to Use DukeData](#how-to-use-dukedata)
 3. [Supported Databases](#supported-databases)
 4. [Future Roadmap](#future-roadmap)
@@ -25,9 +25,9 @@
 
 ### 🔍 Requirements <a name="requirements"></a>
 
-* A computer running a modern operating system.
-* Postgres database setup.
-* OpenAI API key (for GPT model interaction).
+- A computer running a modern operating system.
+- Postgres database setup.
+- OpenAI API key (for GPT model interaction).
 
 ### 📥 Installation and Setup <a name="installation"></a>
 
@@ -39,27 +39,28 @@
 ## 🎓 How to Use DukeData <a name="how-to-use-dukedata"></a>
 
 Once DukeData is running in your browser:
-1. Connect it with your database by providing the necessary details.
+
+1. Connect it with your database by providing a connection URL.
 2. Simply type in your question or data request.
 3. Review the generated SQL query and execute it to retrieve your data.
 
 ## 🗄️ Supported Databases <a name="supported-databases"></a>
 
-* **Postgres**: Mostly Supported
-* **MySQL**: Coming soon...
-* **BigQuery**: In the pipeline...
+- **Postgres**: Mostly Supported
+- **MySQL**: Coming soon...
+- **BigQuery**: In the pipeline...
 
 ## 🛣️ Future Roadmap <a name="future-roadmap"></a>
 
-* Support for MySQL.
-* Support for BigQuery.
+- Support for MySQL.
+- Support for BigQuery.
 
 ## ❓ Troubleshooting and FAQs <a name="troubleshooting-and-faqs"></a>
 
-* **Q**: I'm having trouble connecting to my database. What should I do?
-  * **A**: Ensure you've entered the correct details for your database. If the problem persists, please contact our support.
-* **Q**: The generated SQL query doesn't seem right. What should I do?
-  * **A**: Please report the issue to our support team. Your feedback helps us improve!
+- **Q**: I'm having trouble connecting to my database. What should I do?
+  - **A**: Ensure you've entered the correct details for your database. If the problem persists, please contact our support.
+- **Q**: The generated SQL query doesn't seem right. What should I do?
+  - **A**: Please report the issue to our support team. Your feedback helps us improve!
 
 ## 💼 Contributing to DukeData <a name="contributing-to-dukedata"></a>
 
@@ -72,4 +73,3 @@ DukeData is open-source software. It's licensed under the MIT license. Special t
 ## 💌 Contact and Support <a name="contact-and-support"></a>
 
 For any questions, feedback, or support inquiries, please reach out to our team at `peterboyd192@gmail.com`.
-
