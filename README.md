@@ -1,7 +1,5 @@
 # DukeData: SQL Generator Documentation 📘
 
----
-
 ## 🌟 Introduction
 
 DukeData is an innovative open-source project that leverages the power of OpenAI's GPT model to automatically generate SQL queries. This enables users, even without technical backgrounds, to easily extract relevant data from their databases by simply asking questions! Currently, DukeData primarily supports Postgres databases, with plans to expand to MySQL and BigQuery in the near future.
