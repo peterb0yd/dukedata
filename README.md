@@ -1,9 +1,9 @@
-<h1 align="center"># DukeData 📘</h1>
+<h1 align="center">DukeData 📘</h1>
 
-<center>Convert user prompts to SQL commmands and run them</center>
-<center>(still a work-in-progress)</center>
+<p align="center">Convert user prompts to SQL commmands and run them</p>
+<p align="center">(still a work-in-progress)</p>
 
-### 📋 Table of Contents
+## 📋 Table of Contents
 
 1. [Getting Started](#getting-started)
     * [Requirements](#requirements)
