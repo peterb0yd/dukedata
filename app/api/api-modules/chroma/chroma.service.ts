@@ -18,7 +18,6 @@ const getEmbeddingFunction = () => {
 export const createDataSchemaEmbeddings = async (
 	dataSource: DataSource,
 	dataSchemas: DataSchema[],
-	sampleRows?: string[]
 ) => {
 	try {
 		const collection = await client.createCollection({
@@ -75,16 +74,7 @@ export const queryDataSchemaEmbeddings = async (
 		queryTexts: [text],
     ...whereProp,
 	});
-	const results = [];
-	for (let i = 0; i < result.ids.length; i++) {
-		results.push({
-			id: result.ids[i],
-			metadata: result.metadatas[i],
-			document: result.documents[i],
-			embedding: result.embeddings && result.embeddings[i],
-		});
-	}
-	return results;
+	return result.documents.map(doc => doc.flat()).flat();
 };
 
 export const deleteEmbeddingsForDataSource = (dataSource: DataSource) => {

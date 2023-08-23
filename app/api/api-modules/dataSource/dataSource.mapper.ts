@@ -13,7 +13,7 @@ export const tableSchemaToDefinitionDocument = (
 	tableName: string,
 	schemaDefinition: Array<Record<string, any>>
 ) => {
-	return JSON.stringify({ [`${tableName}-defition`]: schemaDefinition });
+	return JSON.stringify({ [`${tableName}-definition`]: schemaDefinition });
 };
 
 export const sampleRowsToSampleDocument = (
