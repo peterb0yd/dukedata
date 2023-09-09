@@ -10,9 +10,10 @@ import {
 	deleteEmbeddingsForDataSource,
 } from '../chroma/chroma.service';
 import { fulfilledPromiseValues } from '../../utils/promise.server';
-import { DataSchema, DataSource } from '@prisma/client';
+import { DataSchema, DataSource, DataSourcePayload } from '@prisma/client';
 import { IDataSchemaCreate } from '../dataSchema/interfaces/IDataSchemaCreate';
 import { sampleRowsToSampleDocument, tableSchemaToDefinitionDocument } from './dataSource.mapper';
+import { IDataSourceUpdate } from './interfaces/IDataSourceUpdate';
 
 export const createDataSource = async (dataSourceData: IDataSourceCreate) => {
 	const dataSource = await DataSourceModel.create(dataSourceData);
@@ -37,6 +38,16 @@ export const getSelectedDataSource = () => {
 export const getDataSources = () => {
 	return DataSourceModel.findMany();
 };
+
+export const updateDataSource = async (id: number, data: IDataSourceUpdate) => {
+  const selectedDataSource = await DataSourceModel.findSelected();
+  if (selectedDataSource && selectedDataSource.isSelected) {
+    await DataSourceModel.update(selectedDataSource.id, {
+      isSelected: false
+    });
+  }
+  return DataSourceModel.update(id, data);
+}
 
 export const deleteDataSource = async (id: number) => {
 	const dataSource = await DataSourceModel.findById(id);

@@ -6,7 +6,7 @@
     "dev": "remix dev",
     "start": "remix-serve build",
     "db:migrate": "npx prisma migrate dev",
-    "create-sample-databases": "cd sample-databases && ./create_db_containers.sh",
+    "create-db-samples": "cd sample-databases && ./create_db_containers.sh",
     "typecheck": "tsc"
   },
   "dependencies": {

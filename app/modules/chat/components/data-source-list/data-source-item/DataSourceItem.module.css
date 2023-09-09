@@ -15,15 +15,52 @@
 }
 
 /** Data Source Item Content **/
-.DataSourceItem > .allContent {
+.DataSourceItem {  
+  position: relative;
+  display: flex; 
+  flex: 1 4 1;
+  align-items: center;
+  gap: 10px;
+}
+
+/** Toggle Select Checkbox **/
+.DataSourceItem > .checkbox {
+  width: 20px;
+  height: 20px;
+  border: 4px solid var(--brightgreen-dark);
+  cursor: pointer;
+}
+.DataSourceItem > .checkbox:hover {
+  background-color: var(--brightgreen);
+  border: 4px solid var(--brightgreen);
+}
+.DataSourceItem > .checkbox.selected {
+  background-color: var(--brightgreen-dark);
+}
+.DataSourceItem > .checkbox.selected:hover {
+  background-color: var(--brightgreen-dark);
+  border: 4px solid var(--brightgreen-dark);
+}
+
+/** Data Source Item Content Wrapper **/
+.DataSourceItem > .info {
   display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+/** Data Source Text Content **/
+.DataSourceItem > .info > .title {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: 6px;
   flex-direction: row;
   align-items: center;
-  width: 86%;
 }
 
 /** Data Source Item Icon **/
-.DataSourceItem > .allContent > .icon {
+.DataSourceItem > .info > .title > .icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,24 +69,15 @@
   margin-right: 0.5rem;
 }
 
-/** Data Source Text Content **/
-.DataSourceItem > .allContent > .textContent {
-  position: relative;
-  overflow: hidden;
-}
-
 /** Data Source Name **/
-.DataSourceItem > .allContent > .textContent > .name {
+.DataSourceItem > .info > .title > .name {
   font-size: 1rem;
-  margin-bottom: 4px;
 }
 
 /** Data Source URL **/
-.DataSourceItem > .allContent > .textContent > .url {
+.DataSourceItem > .info > .url {
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
   padding-bottom: 0.5rem;
-  width: 100%;
-  overflow-x: auto;
 }

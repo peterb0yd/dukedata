@@ -1,7 +1,7 @@
 import { DataSourceClient } from "@prisma/client";
 import { ActionFunction, ActionArgs, redirect } from "@remix-run/node";
 import { StatusCodes } from "http-status-codes";
-import { createDataSource, deleteDataSource } from "~/api/api-modules/dataSource/dataSource.service";
+import { createDataSource, deleteDataSource, updateDataSource } from "~/api/api-modules/dataSource/dataSource.service";
 import { badRequest } from "~/api/utils/errors.server";
 import { RequestMethods } from "~/enums/requestMethods";
 
@@ -15,6 +15,22 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
       console.log(url);
       const client = form.get("client") as DataSourceClient;
       await createDataSource({ name, url, client });
+      return redirect('/');
+    } catch (error) {
+      console.error(error);
+      return redirect('/', {
+        status: 400
+      });
+    }
+  }
+
+  if (request.method === RequestMethods.PATCH) {
+    try {
+      const form = await request.formData();
+      const id = Number(form.get("id") ?? -1);
+      const isSelectedStr = form.get('isSelected') as string;
+      const isSelected = isSelectedStr === 'true' ? true : false;
+      await updateDataSource(id, { isSelected });
       return redirect('/');
     } catch (error) {
       console.error(error);
@@ -41,4 +57,4 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
   return new Response(null, { status: StatusCodes.METHOD_NOT_ALLOWED })
 }
 
-export default function DataSourcesAPIRoute() {};
+export default function DataSourcesAPIRoute() { };

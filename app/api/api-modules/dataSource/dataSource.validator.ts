@@ -6,3 +6,7 @@ export const ZodDataSourceCreate = z.object({
   url: z.string().min(8).max(255),
   client: z.nativeEnum(DataSourceClient),
 });
+
+export const ZodDataSourceUpdate = z.object({
+  isSelected: z.boolean(),
+})

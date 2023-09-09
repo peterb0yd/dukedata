@@ -26,6 +26,7 @@ model DataSource {
   client      DataSourceClient
   url         String
   dataSchemas DataSchema[]
+  isSelected  Boolean         @default(false)
 }
 
 model DataSchema {

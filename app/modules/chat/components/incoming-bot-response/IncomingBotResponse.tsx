@@ -8,24 +8,23 @@ type IncomingBotResponseProps = {
   message: string;
 };
 
-const startQueryStr = '\`\`\`sql';
+const queryStrSplitter = '\`\`\`';
 
 export const IncomingBotResponse = ({ message }: IncomingBotResponseProps) => {
 
-  // const data = useMemo(() => {
-  //   return splitStringIntoHeadersAndData(message);
-  // }, [message]);
-
   const sqlQuery = useMemo(() => {
     if (!message) return '';
-    const startIndex = message.indexOf(startQueryStr) + startQueryStr.length;
-    const endIndex = message.indexOf('\`\`\`end');
-    return message.substring(startIndex, endIndex);
+    const groups = message.split(queryStrSplitter);
+    if (!groups || groups.length === 0) {
+      return 'No reply';
+    }
+    return groups[1].replace('sql', '');
   }, [message]);
 
   const paragraph = useMemo(() => {
     if (!message) return '';
-    return message.replace(startQueryStr + sqlQuery, '');
+    const regex = new RegExp(queryStrSplitter, 'g');
+    return message.replace(sqlQuery, '').replace(regex, '');
   }, [message]);
 
   console.log(message);

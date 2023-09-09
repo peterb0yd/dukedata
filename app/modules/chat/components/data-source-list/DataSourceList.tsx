@@ -8,12 +8,14 @@ type DataSourceListProps = {
 
 export const DataSourceList = ({ dataSources }: DataSourceListProps) => {
 
+  const sortedDataSources = dataSources.sort((a, b) => a.name > b.name ? 1 : -1);
+
   return (
     <div className={styles.DataSourceList}>
       <h3>Data Sources</h3>
       <div className={styles.table}>
-        {dataSources.map((dataSource, index) => (
-          <DataSourceItem key={index} dataSource={dataSource} />
+        {sortedDataSources.map((dataSource) => (
+          <DataSourceItem key={dataSource.id} dataSource={dataSource} />
         ))}
       </div>
     </div>
