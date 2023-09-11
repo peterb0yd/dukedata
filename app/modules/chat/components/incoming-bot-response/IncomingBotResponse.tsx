@@ -3,14 +3,16 @@ import { DataTable } from '../data-table/DataTable';
 import styles from './IncomingBotResponse.module.css';
 import { splitStringIntoHeadersAndData } from '../../helpers';
 import { SqlCommand } from './sql-command/SqlCommand';
+import { SqlActions } from './sql-actions/SqlActions';
 
 type IncomingBotResponseProps = {
   message: string;
+  onRetryBotResponse: () => void;
 };
 
 const queryStrSplitter = '\`\`\`';
 
-export const IncomingBotResponse = ({ message }: IncomingBotResponseProps) => {
+export const IncomingBotResponse = ({ message, onRetryBotResponse }: IncomingBotResponseProps) => {
 
   const sqlQuery = useMemo(() => {
     if (!message) return '';
@@ -18,7 +20,7 @@ export const IncomingBotResponse = ({ message }: IncomingBotResponseProps) => {
     if (!groups || groups.length === 0) {
       return 'No reply';
     }
-    return groups[1].replace('sql', '');
+    return groups[1] ? groups[1].replace('sql', '') : 'No message';
   }, [message]);
 
   const paragraph = useMemo(() => {
@@ -27,14 +29,18 @@ export const IncomingBotResponse = ({ message }: IncomingBotResponseProps) => {
     return message.replace(sqlQuery, '').replace(regex, '');
   }, [message]);
 
-  console.log(message);
-  
   return (
     <div className={styles.IncomingBotResponse}>
       <p>
-      {paragraph}
+        {paragraph}
       </p>
-      <SqlCommand sqlQuery={sqlQuery} />
+      <SqlCommand
+        sqlQuery={sqlQuery}
+      />
+      <SqlActions
+        sqlQuery={sqlQuery}
+        onRetryBotResponse={onRetryBotResponse}
+      />
     </div>
   );
 }

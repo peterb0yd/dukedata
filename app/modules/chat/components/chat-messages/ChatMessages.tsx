@@ -9,9 +9,10 @@ import { IncomingBotResponse } from "../incoming-bot-response/IncomingBotRespons
 type ChatMessagesProps = {
   messages: Message[];
   botResponse?: string;
+  onRetryBotResponse: () => void;
 }
 
-export const ChatMessages = ({ messages, botResponse }: ChatMessagesProps) => {
+export const ChatMessages = ({ messages, botResponse, onRetryBotResponse }: ChatMessagesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasFirstScroll, setHasFirstScroll] = useState(false);
   const isVisible = Boolean(messages?.length) && hasFirstScroll;
@@ -49,7 +50,7 @@ export const ChatMessages = ({ messages, botResponse }: ChatMessagesProps) => {
       {renderMessages()}
       {botResponse && (
         <Suspense fallback={<p>Loading...</p>}>
-          <IncomingBotResponse message={botResponse} />
+          <IncomingBotResponse message={botResponse} onRetryBotResponse={onRetryBotResponse} />
         </Suspense>
       )}
     </div>

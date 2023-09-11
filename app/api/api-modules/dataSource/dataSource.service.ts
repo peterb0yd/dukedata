@@ -67,6 +67,18 @@ export const getSampleRows = async (dataSource: DataSource, dataSchema: DataSche
 	return sampleRows;
 };
 
+export const executeSqlCommand = async (sqlCommand: string) => {
+  const selectedDataSource = await DataSourceModel.findSelected();
+  if (!selectedDataSource) {
+    throw new Error('No data source is selected');
+  }
+  const connectorService = new DataSourceConnectorService(selectedDataSource);
+	await connectorService.connect();
+  const res = await connectorService.executeCommand(sqlCommand);
+	await connectorService.disconnect();
+  return res;
+}
+
 const getTableSchemas = async (
 	connectorService: DataSourceConnectorService,
 	dataBaseSchema: Array<Record<string, any>>

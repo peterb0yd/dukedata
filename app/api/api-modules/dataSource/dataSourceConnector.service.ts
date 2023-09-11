@@ -80,4 +80,9 @@ export default class DataSourceConnectorService {
       .limit(2);
     return convertSqlToJson(res);
   }
+
+  async executeCommand(command: string): Promise<any> {
+    const connection = getOrCreateSharedConnection(this.dataSource);
+    return connection.raw(command);
+  }
 }

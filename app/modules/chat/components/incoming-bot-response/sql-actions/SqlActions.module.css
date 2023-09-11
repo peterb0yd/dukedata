@@ -1,0 +1,21 @@
+.SqlActions {
+	display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.SqlActions > form > input[type='submit'],
+.SqlActions > button {
+  cursor: pointer;
+  border: 1px solid var(--quadrary-color-dark);
+  outline: none;
+  border-radius: 5px;
+  background-color: var(--quadrary-color-dark);
+  color: var(--text-color-light);
+  padding: 10px;
+  font-size: 16px;
+}
+.SqlActions > form > input[type='submit']:hover,
+.SqlActions > button:hover {
+  color: var(--brightgreen);
+}

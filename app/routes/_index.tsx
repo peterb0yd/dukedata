@@ -32,12 +32,19 @@ export default function Index() {
   const { messages, dataSources } = useLoaderData();
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [botResponse, setBotResponse] = useState('');
+  const [lastMessage, setLastMessage] = useState('');
 
   const toggleSidePanel = () => {
     setIsSidePanelOpen(!isSidePanelOpen);
   }
 
-  const onNewMessage = async (message: string) => {
+  const handleNewBotResponse = async (message?: string) => {
+    if (message) {
+      setLastMessage(message);
+    } else {
+      message = lastMessage ?? '';
+    }
+    console.log({message});
     const response = await fetch("/api/botResponses", {
       method: "POST",
       body: JSON.stringify(message),
@@ -63,9 +70,10 @@ export default function Index() {
         <ChatMessages
           messages={messages}
           botResponse={botResponse}
+          onRetryBotResponse={handleNewBotResponse}
         />
         <AddNewMessage
-          onNewMessage={onNewMessage}
+          onNewMessage={handleNewBotResponse}
         />
       </ChatContainer>
     </MainLayout>
