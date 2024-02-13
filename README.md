@@ -72,4 +72,4 @@ DukeData is open-source software. It's licensed under the MIT license. Special t
 
 ## 💌 Contact and Support <a name="contact-and-support"></a>
 
-For any questions, feedback, or support inquiries, please reach out to our team at `peterboyd192@gmail.com`.
+For any questions, feedback, or support inquiries, please reach out to our team.
